@@ -1,0 +1,22 @@
+<svg width="120" height="120" xmlns="http://www.w3.org/2000/svg" fill="none">
+ <defs>
+  <filter height="140%" width="140%" y="-20%" x="-20%" id="glow">
+   <feGaussianBlur result="blur" stdDeviation="4"/>
+  </filter>
+  <linearGradient y2="100%" x2="100%" y1="0%" x1="0%" id="gradSun">
+   <stop stop-color="#38bdf8" offset="0%"/>
+   <stop stop-color="#0284c7" offset="100%"/>
+  </linearGradient>
+  <linearGradient y2="100%" x2="100%" y1="0%" x1="0%" id="gradSunOrb">
+   <stop stop-color="#f59e0b" offset="0%"/>
+   <stop stop-color="#fbbf24" offset="100%"/>
+  </linearGradient>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_1" d="m0,28c0,-15.21461 12.78539,-28 28,-28l64,0c15.21461,0 28,12.78539 28,28l0,64c0,15.21461 -12.78539,28 -28,28l-64,0c-15.21461,0 -28,-12.78539 -28,-28l0,-64z" opacity="undefined" fill="#0b1326"/>
+  <circle id="svg_2" filter="url(#glow)" fill="url(#gradSunOrb)" r="22" cy="46" cx="76"/>
+  <path id="svg_3" opacity="0.95" fill="url(#gradSun)" d="m51.25,66.5c3,-10 13.75,-18.5 24.75,-16.5c10,2 18,11 18,22c5,0 10,4 10,10c0,6 -5,10 -10,10l-60,0c-8,0 -7.25,-4.75 -7.25,-12.75c0,-7 5.75,-12.75 15.5,-12.75l9,0z"/>
+  <path id="svg_4" opacity="0.8" stroke-linecap="round" stroke-width="3" stroke="#38bdf8" d="m46,82l-8,14m22,-14l-8,14m22,-14l-8,14"/>
+ </g>
+</svg>
