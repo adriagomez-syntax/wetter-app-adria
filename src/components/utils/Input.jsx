@@ -18,8 +18,8 @@ export default function Input({ icon, onDelete, type = "text", placeholder = "",
 				ref={ ref }
 			/>
 			{
-				onDelete &&
-					<Button onClick={ onDelete } className="active:text-accent-1">
+				onDelete && value &&
+					<Button onClick={ onDelete } className="opacity-50 active:text-accent-1">
 						<FaX />
 					</Button>
 			}
