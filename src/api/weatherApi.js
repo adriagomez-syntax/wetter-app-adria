@@ -1,4 +1,6 @@
-const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+import { env } from "cloudflare:workers";
+
+const API_KEY = env.API_KEY;
 const GEO = "/geo/1.0"
 const DATA = "/data/2.5"
 const IMG = "/img/wn"
