@@ -36,8 +36,8 @@ export async function getCurrentWeather(lat, lon) {
 	return await getRequest(url, "Wetter nicht gefunden")
 }
 
-export async function getForecast(city) {
-	const url = `${getBase()}${DATA}/forecast?q=${encodeURIComponent(city)}&units=metric&lang=de&appid=${API_KEY}`
+export async function getForecast(lat, lon) {
+	const url = `${getBase()}${DATA}/forecast?lat=${lat}&lon=${lon}&units=metric&lang=de&appid=${API_KEY}`
 
 	return await getRequest(url, "Vorhersage nicht gefunden")
 }

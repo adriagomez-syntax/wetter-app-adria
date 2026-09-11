@@ -7,14 +7,11 @@ import VisibilityCard from "./cards/VisibilityCard";
 import AirQualityCard from "./cards/AirQualityCard";
 import SunCycleCard from "./cards/SunCycleCard";
 import CloudyCard from "./cards/CloudyCard";
+import Section from "../utils/Section";
 
 export default function TelemetrySection({ main, wind, rain, snow, clouds, visibility, airQuality, sys }) {
 	return (
-		<section className="flex flex-col gap-4">
-			<div className="flex gap-2 items-center">
-				<FaRegChartBar className="text-primary" />
-				<h1 className="font-secondary font-bold">Meteorologische Telemetrie</h1>
-			</div>
+		<Section title="Meteorologische Telemetrie" icon={ FaRegChartBar }>
 			<div className="grid grid-cols-2 gap-4">
 				<WindCard {...wind} />
 				<HumidityCard {...main} />
@@ -25,6 +22,6 @@ export default function TelemetrySection({ main, wind, rain, snow, clouds, visib
 				<AirQualityCard {...airQuality} />
 				<SunCycleCard {...sys} />
 			</div>
-		</section>
+		</Section>
 	)
 }

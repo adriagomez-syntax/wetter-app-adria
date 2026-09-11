@@ -4,6 +4,7 @@ import Header from "./components/header/Header";
 import ResultSection from "./components/result/ResultSection";
 import SearchSection from "./components/search/SearchSection";
 import TelemetrySection from "./components/telemetry/TelemetrySection";
+import ForecastSection from "./components/forecast/ForecastSection";
 
 export default function App() {
 	
@@ -19,6 +20,7 @@ export default function App() {
 				<SearchSection setState={ setState } setWeather={ setWeather } setForecast={ setForecast } setAirQuality={ setAirQuality } />
 				<ResultSection state={ state } {...weather} />
 				<TelemetrySection {...weather} airQuality={ airQuality } />
+				<ForecastSection forecast={ forescast } />
 			</main>
 			<Footer />
 		</div>

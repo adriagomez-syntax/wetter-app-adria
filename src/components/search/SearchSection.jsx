@@ -31,12 +31,12 @@ export default function SearchSection({ setState, setWeather, setForecast, setAi
 
 			const { lat, lon, state } = await getCoords(city)
 			const weatherData = await getCurrentWeather(lat, lon)
-			//const forecastData = await getForecast(city)
+			const forecastData = await getForecast(lat, lon)
 			const airQualityData = await getAirQuality(lat, lon)
 
 			setState(state)
 			setWeather(weatherData)
-			//setForecast(forecastData.list.filter((item) => item.d_txt.includes("12:00:00")))
+			setForecast(forecastData.list.filter((item) => item.dt_txt.includes("12:00:00")))
 			setAirQuality(airQualityData.list[0])
 		}
 
