@@ -1,13 +1,8 @@
-import { useEffect, useState } from "react"
+import { useCurrentTime } from "../../hooks/useCurrentTime"
 
 export default function CurrentTime() {
 	
-	const [today, setToday] = useState(new Date())
-		
-	useEffect(() => {
-		const interval = setInterval(() => setToday(new Date()), 60000)
-		return () => clearInterval(interval)
-	}, [])
+	const today = useCurrentTime()
 	
 	return (
 		<div className="flex font-light gap-1 text-xs">

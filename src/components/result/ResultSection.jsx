@@ -31,7 +31,7 @@ export default function ResultSection({ coord, weather, main, name, sys }) {
 							<h2 className="font-secondary font-bold text-5xl">{ temp }</h2>
 							<span className="text-primary text-2xl">°C</span>
 						</div>
-						<div className="flex gap-2 text-2xs font-light">
+						<div className="flex gap-2 text-2xs md:text-xs font-light">
 							<p>{`Gefühlt ${ feels_like }°C`}</p>
 							<p className="text-background-dark/20">•</p>
 							<p className="text-secondary">{`T: ${ temp_min }°C H: ${ temp_max }°C`}</p>
