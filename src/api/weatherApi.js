@@ -24,6 +24,8 @@ export async function getRequest(url, signal, errorMsg) {
 export async function getCoords(city, signal) {
 	const url = `${getBase()}${GEO}/direct?q=${encodeURIComponent(city)}&limit=1&appid=${API_KEY}`
 	const resp = await getRequest(url, signal, "Geolokalisierung nicht gefunden")
+	if (resp.length < 1) { throw new Error("Geolokalisierung nicht gefunden") }
+
 	return resp[0]
 }
 

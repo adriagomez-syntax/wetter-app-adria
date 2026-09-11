@@ -9,20 +9,23 @@ import ForecastSection from "../forecast/ForecastSection"
 import InfoBlock from "../utils/InfoBlock"
 import ErrorContext from "../../context/ErrorContext"
 import { useLocalStorage } from "../../hooks/useLocalStorage"
+import { useCity } from "../../hooks/useCity"
 
 export default function Main() {
 	
 	const { error } = useContext(ErrorContext)
 	const [position, setPosition] = useLocalStorage("lastPosition", null)
-	const [city, setCity] = useLocalStorage("lastCity", "")
+	const [query, setQuery] = useLocalStorage("")
+	const city = useCity(query)
 	const { weather, forescast, airQuality, loading } = useWeather({city: city, position: position})
 	
 	return (
 		<main className="flex-1 flex bg-background-mid p-4 md:justify-center">
 			<div className="min-w-0 flex-1 flex flex-col gap-4 md:max-w-[60vw]">
 				<SearchSection 
+					query={ query }
+					setQuery={ setQuery } 
 					setPosition={ setPosition }
-					setCity={ setCity } 
 				/>
 				{ loading
 					? <LoadingSection />
