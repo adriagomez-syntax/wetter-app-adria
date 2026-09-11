@@ -17,11 +17,11 @@ export default function ForecastCard({ dt_txt, main, weather, wind }) {
 
 	return (
 		<Card className="flex-1 grid grid-cols-4 gap-2 items-center">
-			<div className="col-span-2 flex gap-4">
+			<div className="col-span-2 flex gap-4 items-center">
 				<WeatherIcon icon={ weatherIcon } alt={ weatherName } className="max-h-10" />
-				<div className="col-span-2 flex flex-col gap-2 justify-between items-start">
+				<div className="flex flex-col gap-2 justify-between items-start overflow-hidden">
 					<h3 className="font-bold">{ dayText }</h3>
-					<p className="text-xs">{ description }</p>
+					<p title={ description } className="max-w-full text-xs truncate">{ description }</p>
 				</div>
 			</div>
 			<div className="flex flex-col gap-2 items-center">

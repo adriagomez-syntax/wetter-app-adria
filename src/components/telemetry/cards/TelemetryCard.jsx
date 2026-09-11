@@ -7,7 +7,7 @@ export default function TelemetryCard({ title, icon, iconColor = "text-primary",
 	return (
 		<Card className="flex flex-col gap-2 justify-between">
 			<div className="flex gap-2 justify-between items-center">
-				<h2 className="font-secondary font-light tracking-widest uppercase text-xs">{ title }</h2>
+				<h2 title={ title } className="font-secondary font-light tracking-widest uppercase text-xs truncate">{ title }</h2>
 				<Icon className={ iconColor } />
 			</div>
 			<div className="flex gap-4 items-end">

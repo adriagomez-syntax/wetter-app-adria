@@ -21,7 +21,7 @@ export default function ResultSection({ coord, weather, main, name, sys }) {
 				<div className="flex flex-col gap-2">
 					<div className="flex gap-2 items-center">
 						<FaMapMarkerAlt className="text-primary" />
-						<h1 className="font-secondary font-bold text-2xl truncate">{ fullName }</h1>
+						<h1 title={ fullName } className="font-secondary font-bold text-2xl truncate">{ fullName }</h1>
 					</div>
 					<p className="text-xs">{`Koordinaten: ${fullCoords}`}</p>
 				</div>
