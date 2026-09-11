@@ -3,9 +3,9 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import WeatherIcon from "../utils/WeatherIcon";
 import InfoBlock from "../utils/InfoBlock"
 
-export default function ResultSection({ state, coord, weather, main, name, sys }) {
+export default function ResultSection({ coord, weather, main, name, sys }) {
 	
-	const fullName = name && sys ? `${ name }, ${ state }` : "--"
+	const fullName = name && sys ? `${ name }, ${ sys.country }` : "--"
 	const fullCoords = coord ? `${coord.lon}° N, ${coord.lat}° O` : "--"
 	const temp = main ? Math.trunc(main.temp) : "--"
 	const feels_like = main ? Math.trunc(main.feels_like) : "--"

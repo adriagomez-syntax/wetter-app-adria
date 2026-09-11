@@ -13,7 +13,6 @@ export default function App() {
 	
 	const [error, setError] = useState(null)
 	const [loading, setLoading] = useState(false)
-	const [state, setState] = useState("")
 	const [weather, setWeather] = useState(null)
 	const [forescast, setForecast] = useState([])
 	const [airQuality, setAirQuality] = useState([])
@@ -25,7 +24,6 @@ export default function App() {
 				<SearchSection 
 					setLoading={ setLoading } 
 					setError={ setError } 
-					setState={ setState } 
 					setWeather={ setWeather } 
 					setForecast={ setForecast } 
 					setAirQuality={ setAirQuality } 
@@ -34,9 +32,9 @@ export default function App() {
 					? <LoadingSection />
 					: error
 						? <ErrorSection message={ error } />
-						: state	
+						: (weather && forescast && airQuality)
 							? <>
-								<ResultSection state={ state } {...weather} />
+								<ResultSection {...weather} />
 								<TelemetrySection {...weather} airQuality={ airQuality } />
 								<ForecastSection forecast={ forescast } />
 							</>
