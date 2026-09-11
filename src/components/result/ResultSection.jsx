@@ -1,6 +1,7 @@
 import Card from "../utils/Card";
-import { FaInfoCircle, FaMapMarkerAlt } from "react-icons/fa";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import WeatherIcon from "../utils/WeatherIcon";
+import InfoBlock from "../utils/InfoBlock"
 
 export default function ResultSection({ state, coord, weather, main, name, sys }) {
 	
@@ -38,10 +39,7 @@ export default function ResultSection({ state, coord, weather, main, name, sys }
 					</div>
 					<WeatherIcon icon={ weatherIcon } alt={ weatherName } />
 				</div>
-				<div className="flex gap-2 items-center bg-primary/20 rounded-lg p-4">
-					<FaInfoCircle className="text-primary shrink-0" />
-					<p className="text-xs truncate">{ description }</p>
-				</div>
+				<InfoBlock text={ description } />
 			</Card>
 		</section>
 	)

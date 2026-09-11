@@ -5,7 +5,7 @@ import Button from "../utils/Button";
 import { useEffect, useState } from "react";
 import { getAirQuality, getCoords, getCurrentWeather, getForecast } from "../../api/weatherApi";
 
-export default function SearchSection({ setState, setWeather, setForecast, setAirQuality }) {
+export default function SearchSection({ setState, setWeather, setForecast, setAirQuality, setLoading, setError }) {
 	
 	const [query, setQuery] = useState("")
 	const [city, setCity] = useState("")
@@ -21,6 +21,8 @@ export default function SearchSection({ setState, setWeather, setForecast, setAi
 
 	useEffect(() => {
 		
+		const controller = new AbortController()
+
 		async function load() {
 			if (!city) {
 				setWeather(null)
@@ -29,19 +31,31 @@ export default function SearchSection({ setState, setWeather, setForecast, setAi
 				return
 			}
 
-			const { lat, lon, state } = await getCoords(city)
-			const weatherData = await getCurrentWeather(lat, lon)
-			const forecastData = await getForecast(lat, lon)
-			const airQualityData = await getAirQuality(lat, lon)
-
-			setState(state)
-			setWeather(weatherData)
-			setForecast(forecastData.list.filter((item) => item.dt_txt.includes("12:00:00")))
-			setAirQuality(airQualityData.list[0])
+			setLoading(true)
+			setError(null)
+			try
+			{
+				const { lat, lon, state } = await getCoords(city, controller.signal)
+				const weatherData = await getCurrentWeather(lat, lon, controller.signal)
+				const forecastData = await getForecast(lat, lon, controller.signal)
+				const airQualityData = await getAirQuality(lat, lon, controller.signal)
+			
+				setState(state)
+				setWeather(weatherData)
+				setForecast(forecastData.list.filter((item) => item.dt_txt.includes("12:00:00")))
+				setAirQuality(airQualityData.list[0])
+			} catch(e) {
+				if (e.name !== "AbortError") { setError(e.message) }
+			} finally {
+				setLoading(false)
+			}
 		}
 
 		load()
 
+		return () => controller.abort()
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [city])
 
 	return (

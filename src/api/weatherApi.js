@@ -9,47 +9,38 @@ function getBase(api = true) {
 	return url
 }
 
-export async function getRequest(url, errorMsg) {
-	const res = await fetch(url)
+export async function getRequest(url, signal, errorMsg) {
+	const res = await fetch(url, { signal })
 		.then((res) => {
 			if (!res.ok) { throw new Error(`${errorMsg} (${res.status})`) }
-
 			return res.json()
 		})
 
 	return res
 }
 
-export async function getCoords(city) {
+export async function getCoords(city, signal) {
 	const url = `${getBase()}${GEO}/direct?q=${encodeURIComponent(city)}&limit=1&appid=${API_KEY}`
-
-	const resp = await getRequest(url, "Geolokalisierung nicht gefunden")
-	const data = resp[0]
-	const { lon, lat, state } = data
-
-	return { lon, lat, state }
+	const resp = await getRequest(url, signal, "Geolokalisierung nicht gefunden")
+	return resp[0]
 }
 
-export async function getCurrentWeather(lat, lon) {
+export async function getCurrentWeather(lat, lon, signal) {
 	const url = `${getBase()}${DATA}/weather?lat=${lat}&lon=${lon}&units=metric&lang=de&appid=${API_KEY}`
-	
-	return await getRequest(url, "Wetter nicht gefunden")
+	return await getRequest(url, signal, "Wetter nicht gefunden")
 }
 
-export async function getForecast(lat, lon) {
+export async function getForecast(lat, lon, signal) {
 	const url = `${getBase()}${DATA}/forecast?lat=${lat}&lon=${lon}&units=metric&lang=de&appid=${API_KEY}`
-
-	return await getRequest(url, "Vorhersage nicht gefunden")
+	return await getRequest(url, signal, "Vorhersage nicht gefunden")
 }
 
-export async function getAirQuality(lat, lon) {
+export async function getAirQuality(lat, lon, signal) {
 	const url = `${getBase()}${DATA}/air_pollution?lat=${lat}&lon=${lon}&units=metric&lang=de&appid=${API_KEY}`
-
-	return await getRequest(url, "Luftqualität nicht gefunden")
+	return await getRequest(url, signal, "Luftqualität nicht gefunden")
 }
 
 export function getIcon(icon) {
 	const url = `${getBase(false)}${IMG}/${icon}@2x.png`
-
 	return url
 }
