@@ -46,13 +46,24 @@ export default function SearchSection({ setWeather, setForecast, setAirQuality, 
 					lon = resp.lon
 				}
 
-				const weatherData = await getCurrentWeather(lat, lon, controller.signal)
-				const forecastData = await getForecast(lat, lon, controller.signal)
-				const airQualityData = await getAirQuality(lat, lon, controller.signal)
-			
-				setWeather(weatherData)
-				setForecast(forecastData.list.filter((item) => item.dt_txt.includes("12:00:00")))
-				setAirQuality(airQualityData.list[0])
+				let weatherData = null
+				let forecastData = null
+				let airQualityData = null
+
+				Promise.all([
+					getCurrentWeather(lat, lon, controller.signal),
+					getForecast(lat, lon, controller.signal),
+					getAirQuality(lat, lon, controller.signal)
+				])
+					.then((values) => {
+						weatherData = values[0]
+						forecastData = values[1]
+						airQualityData = values[2]
+
+						setWeather(weatherData)
+						setForecast(forecastData.list.filter((item) => item.dt_txt.includes("12:00:00")))
+						setAirQuality(airQualityData.list[0])
+					})
 			} catch(e) {
 				if (e.name !== "AbortError") { setError(e.message) }
 			} finally {
