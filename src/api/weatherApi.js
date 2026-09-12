@@ -1,4 +1,5 @@
 import { env } from "cloudflare:workers";
+import { temperatureUnits } from "../assets/utils";
 
 const API_KEY = env.API_KEY;
 const GEO = "/geo/1.0"
@@ -30,18 +31,21 @@ export async function getCoords(city, signal) {
 	return resp[0]
 }
 
-export async function getCurrentWeather(lat, lon, signal) {
-	const url = `${getBase()}${DATA}/weather?lat=${lat}&lon=${lon}&units=metric&lang=de&appid=${API_KEY}`
+export async function getCurrentWeather(lat, lon, signal, unitsIndex = 0) {
+	const units = temperatureUnits[unitsIndex].id
+	const url = `${getBase()}${DATA}/weather?lat=${lat}&lon=${lon}&units=${units}&lang=de&appid=${API_KEY}`
 	return await getRequest(url, signal, "Wetter nicht gefunden")
 }
 
-export async function getForecast(lat, lon, signal) {
-	const url = `${getBase()}${DATA}/forecast?lat=${lat}&lon=${lon}&units=metric&lang=de&appid=${API_KEY}`
+export async function getForecast(lat, lon, signal, unitsIndex = 0) {
+	const units = temperatureUnits[unitsIndex].id
+	const url = `${getBase()}${DATA}/forecast?lat=${lat}&lon=${lon}&units=${units}&lang=de&appid=${API_KEY}`
 	return await getRequest(url, signal, "Vorhersage nicht gefunden")
 }
 
-export async function getAirQuality(lat, lon, signal) {
-	const url = `${getBase()}${DATA}/air_pollution?lat=${lat}&lon=${lon}&units=metric&lang=de&appid=${API_KEY}`
+export async function getAirQuality(lat, lon, signal, unitsIndex = 0) {
+	const units = temperatureUnits[unitsIndex].id
+	const url = `${getBase()}${DATA}/air_pollution?lat=${lat}&lon=${lon}&units=${units}&lang=de&appid=${API_KEY}`
 	return await getRequest(url, signal, "Luftqualität nicht gefunden")
 }
 

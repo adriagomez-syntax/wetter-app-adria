@@ -1,8 +1,13 @@
 import { FaWind } from "react-icons/fa6"
-import { getDirection } from "../../../assets/utils"
+import { temperatureUnits, getDirection } from "../../../assets/utils"
 import TelemetryCard from "./TelemetryCard"
+import { useContext } from "react"
+import TemperatureContext from "../../../context/TemperatureContext"
 
 export default function WindCard({ speed, gust, deg }) {
+
+	const { tempUnit } = useContext(TemperatureContext)
+	const velocity = temperatureUnits[tempUnit].velocity
 
 	const windKm = speed ? Math.trunc(speed * 3.6) : "--"
 	const gustKm = gust ? (gust ? Math.trunc(gust * 3.6) : "") : ""
@@ -13,13 +18,13 @@ export default function WindCard({ speed, gust, deg }) {
 			title="Wind" 
 			icon={ FaWind } 
 			value={ windKm } 
-			units="km/h" 
+			units={ velocity } 
 			extra={ direction }
 		>
 			{ gustKm &&
 				<div className="flex gap-1">
 					<p>Böen: </p>
-					<span>{ gustKm } km/h</span>
+					<span>{`${ gustKm } ${ velocity }`}</span>
 				</div>
 			}
 		</TelemetryCard>

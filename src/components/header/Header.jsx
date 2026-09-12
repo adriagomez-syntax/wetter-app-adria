@@ -1,7 +1,6 @@
 import Logo from "./Logo";
-import { FaArrowsRotate } from "react-icons/fa6";
-import Button from "../utils/Button";
 import CurrentTime from "./CurrentTime";
+import UnitsToggle from "./UnitsToogle";
 
 export default function Header() {
 	return (
@@ -15,9 +14,7 @@ export default function Header() {
 				</div>
 				<CurrentTime />
 			</div>
-			<Button>
-				<FaArrowsRotate />
-			</Button>
+			<UnitsToggle />
 		</header>
 	)
 }

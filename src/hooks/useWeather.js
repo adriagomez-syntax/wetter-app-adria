@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react"
 import { getAirQuality, getCoords, getCurrentWeather, getForecast } from "../api/weatherApi"
 import ErrorContext from "../context/ErrorContext"
+import TemperatureContext from "../context/TemperatureContext"
 
 export function useWeather({ city, position }) {
 	
+	const { tempUnit } = useContext(TemperatureContext)
 	const { setError } = useContext(ErrorContext)
 	const [loading, setLoading] = useState(false)
 	const [weather, setWeather] = useState(null)
@@ -41,9 +43,9 @@ export function useWeather({ city, position }) {
 				let airQualityData = null
 
 				Promise.all([
-					getCurrentWeather(lat, lon, controller.signal),
-					getForecast(lat, lon, controller.signal),
-					getAirQuality(lat, lon, controller.signal)
+					getCurrentWeather(lat, lon, controller.signal, tempUnit),
+					getForecast(lat, lon, controller.signal, tempUnit),
+					getAirQuality(lat, lon, controller.signal, tempUnit)
 				])
 					.then((values) => {
 						weatherData = values[0]
@@ -66,7 +68,7 @@ export function useWeather({ city, position }) {
 		return () => controller.abort()
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [city, position])
+	}, [city, position, tempUnit])
 
 	return { weather, forescast, airQuality, loading }
 }

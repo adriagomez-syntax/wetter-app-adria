@@ -1,3 +1,8 @@
+export const temperatureUnits = [
+	{ id: "metric", rep: "°C", velocity: "km/h" },
+	{ id: "imperial", rep: "°F", velocity: "mph" }
+]
+
 const directions = [
 	"N",
 	"NNE",

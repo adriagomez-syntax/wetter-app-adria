@@ -2,9 +2,15 @@ import { FaTint } from "react-icons/fa";
 import Card from "../utils/Card";
 import WeatherIcon from "../utils/WeatherIcon";
 import { FaWind } from "react-icons/fa6";
+import { useContext } from "react";
+import TemperatureContext from "../../context/TemperatureContext";
+import { temperatureUnits } from "../../assets/utils";
 
 export default function ForecastCard({ dt_txt, main, weather, wind }) {
 	
+	const { tempUnit } = useContext(TemperatureContext)
+	const temprep = temperatureUnits[tempUnit].rep
+
 	const weatherIcon = weather ? weather[0].icon : ""
 	const weatherName = weather ? weather[0].main : ""
 	const dayText = new Date(dt_txt).toLocaleDateString("de-De", { weekday: "short", day: "numeric" })
@@ -25,20 +31,24 @@ export default function ForecastCard({ dt_txt, main, weather, wind }) {
 				</div>
 			</div>
 			<div className="flex flex-col gap-2 items-center">
-				<p className="font-bold">{ temp }°C</p>
+				<p className="font-bold">{`${ temp }${ temprep }`}</p>
 				<div className="flex gap-2 text-xs">
-					<p className="text-primary">{ temp_min }°C</p>
-					<p className="text-secondary">{ temp_max }°C</p>
+					<p className="text-primary">{`${ temp_min }${ temprep }`}</p>
+					<p className="text-secondary">{`${ temp_max }${ temprep }`}</p>
 				</div>
 			</div>
 			<div className="flex flex-col gap-2 justify-between items-end">
 				<div className="flex gap-2 items-center text-xs text-primary">
 					<FaTint />
-					<p>{ humidity }%</p>
+					<p>{ humidity }
+						<span className="text-2xs"> %</span>
+					</p>
 				</div>
 				<div className="flex gap-2 items-center text-xs text-secondary">
 					<FaWind />
-					<p>{ windSpeed } km/h</p>
+					<p>{ windSpeed }
+						<span className="text-2xs"> km/h</span>
+					</p>
 				</div>
 			</div>
 		</Card>
