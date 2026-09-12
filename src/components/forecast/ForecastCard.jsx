@@ -10,6 +10,7 @@ export default function ForecastCard({ dt_txt, main, weather, wind }) {
 	
 	const { tempUnit } = useContext(TemperatureContext)
 	const temprep = temperatureUnits[tempUnit].rep
+	const velocity = temperatureUnits[tempUnit].velocity
 
 	const weatherIcon = weather ? weather[0].icon : ""
 	const weatherName = weather ? weather[0].main : ""
@@ -47,7 +48,7 @@ export default function ForecastCard({ dt_txt, main, weather, wind }) {
 				<div className="flex gap-2 items-center text-xs text-secondary">
 					<FaWind />
 					<p>{ windSpeed }
-						<span className="text-2xs"> km/h</span>
+						<span className="text-2xs">{` ${velocity}`}</span>
 					</p>
 				</div>
 			</div>
