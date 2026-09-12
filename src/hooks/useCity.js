@@ -4,7 +4,7 @@ import { useDebounce } from "./useDebounce"
 
 export function useCity(value) {
 	const [city, setCity] = useLocalStorage("lastCity", "")
-	const debounced = useDebounce(value.trim())
+	const debounced = useDebounce(value ? value.trim() : value)
 
 	useEffect(() => {
 		setCity(debounced)

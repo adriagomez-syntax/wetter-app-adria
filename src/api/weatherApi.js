@@ -4,9 +4,10 @@ const API_KEY = env.API_KEY;
 const GEO = "/geo/1.0"
 const DATA = "/data/2.5"
 const IMG = "/img/wn"
+const MAP = "/map/precipitation_new/3"
 
-function getBase(api = true) {
-	const url = `https://${api ? "api." : ""}openweathermap.org`
+function getBase(subdomain = "api.") {
+	const url = `https://${subdomain}openweathermap.org`
 
 	return url
 }
@@ -45,6 +46,11 @@ export async function getAirQuality(lat, lon, signal) {
 }
 
 export function getIcon(icon) {
-	const url = `${getBase(false)}${IMG}/${icon}@2x.png`
+	const url = `${getBase("")}${IMG}/${icon}@2x.png`
+	return url
+}
+
+export function getMap(lat, lon) {
+	const url = `${getBase("tile.")}${MAP}/${lat}/${lon}.png?appid=${API_KEY}`
 	return url
 }

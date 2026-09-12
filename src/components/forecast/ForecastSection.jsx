@@ -4,7 +4,7 @@ import ForecastCard from "./ForecastCard";
 
 export default function ForecastSection({ forecast }) {
 	return (
-		<Section title="7-Tage-Vorhersage" icon={ FaRegListAlt } className="md:w-1/2">
+		<Section title="7-Tage-Vorhersage" icon={ FaRegListAlt }>
 			<ul className="flex flex-col gap-4">
 				{ forecast &&
 					forecast.map(item => (

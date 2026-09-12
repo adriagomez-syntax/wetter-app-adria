@@ -10,6 +10,7 @@ import InfoBlock from "../utils/InfoBlock"
 import ErrorContext from "../../context/ErrorContext"
 import { useLocalStorage } from "../../hooks/useLocalStorage"
 import { useCity } from "../../hooks/useCity"
+import MapSection from "../map/MapSection"
 
 export default function Main() {
 	
@@ -37,7 +38,13 @@ export default function Main() {
 									<ResultSection {...weather} />
 									<TelemetrySection {...weather} airQuality={ airQuality } />
 								</div>
-								<ForecastSection forecast={ forescast } />
+								<div className="flex flex-col gap-4 md:w-1/2">
+									<ForecastSection forecast={ forescast } />
+									{
+									//	<MapSection />
+									}
+								</div>
+									
 							</div>
 							: <InfoBlock text="Beginne mit der Suche nach einer Stadt…" />
 				}
