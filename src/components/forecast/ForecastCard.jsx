@@ -9,8 +9,9 @@ import { temperatureUnits } from "../../assets/utils";
 export default function ForecastCard({ dt_txt, main, weather, wind }) {
 	
 	const { tempUnit } = useContext(TemperatureContext)
-	const temprep = temperatureUnits[tempUnit].rep
-	const velocity = temperatureUnits[tempUnit].velocity
+	const tempObj = temperatureUnits[tempUnit]
+	const temprep = tempObj.rep
+	const velocity = tempObj.velocity
 
 	const weatherIcon = weather ? weather[0].icon : ""
 	const weatherName = weather ? weather[0].main : ""
@@ -20,7 +21,7 @@ export default function ForecastCard({ dt_txt, main, weather, wind }) {
 	const temp_min = main ? Math.round(main.temp_min) : ""
 	const temp_max = main ? Math.round(main.temp_max) : ""
 	const humidity = main ? main.humidity : ""
-	const windSpeed = wind ? Math.trunc(wind.speed * 3.6) : ""
+	const windSpeed = wind ? Math.trunc(wind.speed * tempObj.conversion) : ""
 
 	return (
 		<Card className="flex-1 grid grid-cols-4 gap-2 items-center">

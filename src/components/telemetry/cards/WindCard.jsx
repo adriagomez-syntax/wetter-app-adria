@@ -7,10 +7,11 @@ import TemperatureContext from "../../../context/TemperatureContext"
 export default function WindCard({ speed, gust, deg }) {
 
 	const { tempUnit } = useContext(TemperatureContext)
-	const velocity = temperatureUnits[tempUnit].velocity
+	const tempObj = temperatureUnits[tempUnit]
+	const velocity = tempObj.velocity
 
-	const windKm = speed ? Math.trunc(speed * 3.6) : "--"
-	const gustKm = gust ? (gust ? Math.trunc(gust * 3.6) : "") : ""
+	const windKm = speed ? Math.trunc(speed * tempObj.conversion) : "--"
+	const gustKm = gust ? (gust ? Math.trunc(gust * tempObj.conversion) : "") : ""
 	const direction = deg ? getDirection(deg) : ""
 
 	return (
