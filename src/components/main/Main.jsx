@@ -18,7 +18,7 @@ export default function Main() {
 	const [position, setPosition] = useLocalStorage("lastPosition", null)
 	const [query, setQuery] = useLocalStorage("")
 	const city = useCity(query)
-	const { weather, forescast, airQuality, loading } = useWeather({city: city, position: position})
+	const { weather, forescast, airQuality, state, loading } = useWeather({city: city, position: position})
 	
 	return (
 		<main className="flex-1 flex bg-background-mid p-4 md:justify-center">
@@ -35,7 +35,7 @@ export default function Main() {
 						: (weather && forescast && airQuality)
 							? <div className="flex flex-col gap-4 md:flex-row md:justify-between">
 								<div className="flex flex-col gap-4 md:w-1/2">
-									<ResultSection {...weather} />
+									<ResultSection {...weather} state={ state } />
 									<TelemetrySection {...weather} airQuality={ airQuality } />
 								</div>
 								<div className="flex flex-col gap-4 md:w-1/2">

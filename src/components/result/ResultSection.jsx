@@ -6,12 +6,12 @@ import { useContext } from "react";
 import TemperatureContext from "../../context/TemperatureContext";
 import { temperatureUnits } from "../../assets/utils";
 
-export default function ResultSection({ coord, weather, main, name, sys }) {
+export default function ResultSection({ coord, weather, main, sys, state }) {
 	
 	const { tempUnit } = useContext(TemperatureContext)
 	const temprep = temperatureUnits[tempUnit].rep
 
-	const fullName = name && sys ? `${ name }, ${ sys.country }` : "--"
+	const fullName = state && sys ? `${ state }, ${ sys.country }` : "--"
 	const fullCoords = coord ? `${coord.lon}° N, ${coord.lat}° O` : "--"
 	const temp = main ? Math.trunc(main.temp) : "--"
 	const feels_like = main ? Math.trunc(main.feels_like) : "--"

@@ -7,10 +7,12 @@ export function useWeather({ city, position }) {
 	
 	const { tempUnit } = useContext(TemperatureContext)
 	const { setError } = useContext(ErrorContext)
+	
 	const [loading, setLoading] = useState(false)
 	const [weather, setWeather] = useState(null)
 	const [forescast, setForecast] = useState([])
 	const [airQuality, setAirQuality] = useState([])
+	const [state, setState] = useState("")
 
 	useEffect(() => {
 		const controller = new AbortController()
@@ -36,6 +38,7 @@ export function useWeather({ city, position }) {
 					const resp = await getCoords(city, controller.signal)
 					lat = resp.lat
 					lon = resp.lon
+					setState(resp.name)
 				}
 
 				let weatherData = null
@@ -55,6 +58,10 @@ export function useWeather({ city, position }) {
 						setWeather(weatherData)
 						setForecast(forecastData.list.filter((item) => item.dt_txt.includes("12:00:00")))
 						setAirQuality(airQualityData.list[0])
+
+						if (position) {
+							setState(weatherData.name)
+						}
 					})
 			} catch(e) {
 				if (e.name !== "AbortError") { setError(e.message) }
@@ -70,5 +77,5 @@ export function useWeather({ city, position }) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [city, position, tempUnit])
 
-	return { weather, forescast, airQuality, loading }
+	return { weather, forescast, airQuality, state, loading }
 }
