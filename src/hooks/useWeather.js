@@ -41,28 +41,19 @@ export function useWeather({ city, position }) {
 					setState(resp.name)
 				}
 
-				let weatherData = null
-				let forecastData = null
-				let airQualityData = null
-
-				Promise.all([
+				const [weatherData, forecastData, airQualityData] = await Promise.all([
 					getCurrentWeather(lat, lon, controller.signal, tempUnit),
 					getForecast(lat, lon, controller.signal, tempUnit),
 					getAirQuality(lat, lon, controller.signal, tempUnit)
 				])
-					.then((values) => {
-						weatherData = values[0]
-						forecastData = values[1]
-						airQualityData = values[2]
 
-						setWeather(weatherData)
-						setForecast(forecastData.list.filter((item) => item.dt_txt.includes("12:00:00")))
-						setAirQuality(airQualityData.list[0])
+				setWeather(weatherData)
+				setForecast(forecastData.list.filter((item) => item.dt_txt.includes("12:00:00")))
+				setAirQuality(airQualityData.list[0])
 
-						if (position) {
-							setState(weatherData.name)
-						}
-					})
+				if (position) {
+					setState(weatherData.name)
+				}
 			} catch(e) {
 				if (e.name !== "AbortError") { setError(e.message) }
 			} finally {
